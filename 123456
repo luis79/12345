@@ -1,0 +1,64 @@
+package bigleasves;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.ImageObserver;
+import java.util.ArrayList;
+
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+
+public class LuisInvader extends JComponent implements Runnable {
+	
+	static invader darth;
+	static Image myImage = Toolkit.getDefaultToolkit().getImage("dog.jpg");
+	
+	public LuisInvader() {
+
+		Thread t = new Thread(this);
+		t.start();
+	}
+	
+	public static void main(String[] args) {
+		JFrame frame = new JFrame("Dencker is better thaN EVERYTHING!");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(700, 700);
+		frame.setVisible(true);
+		frame.add(new LuisInvader());
+		frame.getContentPane().setBackground(Color.black);
+		double ranVX = Math.random();
+		double ranVY = Math.random();
+		darth = new invader(myImage, 15, 15, ranVX, ranVY);
+		
+		ArrayList<Integer> sample = new ArrayList<Integer>();
+		
+			sample.add(5);
+			sample.add(2);
+			sample.add(1,3);
+			
+			System.out.println("Currently in the array list:"+sample);
+			
+		}
+	
+	public void paint(Graphics g) {
+	
+		darth.paint(g, this);
+		System.out.println(darth.getX() + ", " + darth.getY());
+	}
+		
+	
+	@Override
+	public void run() {
+		while(true) {
+			repaint();
+			try {
+				Thread.sleep(30);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+} 
