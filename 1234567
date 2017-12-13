@@ -1,0 +1,49 @@
+package bigleasves;
+
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.ImageObserver;
+
+public class invader {
+	Image myImage;
+	int x, y;
+	double vx, vy;
+	Image darth;
+	
+	public invader(Image i, int startx, int starty, double vxIn, double vyIn){
+		x = startx; 
+		y = starty; 
+		darth = i;
+		vx = vxIn;
+		vy = vyIn;
+		myImage = i;
+		
+	}
+	
+	public void update(){
+		x += (int) vx;
+		y += (int) vy;
+		
+		if(this.x>700 - 200){
+			this.vx = -Math.abs(vx);
+		}else if (this.y<0){
+			this.vy = -Math.abs(vy);
+		}
+	}
+	public Image getImage() {
+
+		return this.darth;
+		
+	}
+	public int getX(){
+		return x;
+	}
+	public int getY(){
+		return y;
+	}
+	public void paint(Graphics g, ImageObserver io) {
+		g.drawImage(myImage, x, y, io);
+	}
+	
+}
